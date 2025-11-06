@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8467080813177623870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6228493439933914652}
+  - component: {fileID: 6956338047915989523}
+  m_Layer: 0
+  m_Name: ChatBotManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6228493439933914652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8467080813177623870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 540.0698, y: 1169, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6956338047915989523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8467080813177623870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3045d23a92953544da9aa6a755d84f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  painelChat: {fileID: 0}
+  botaoAbrirChat: {fileID: 0}
+  botaoFechar: {fileID: 0}
+  listaPerguntas: {fileID: 0}
+  botaoPerguntaPrefab: {fileID: 0}
+  textoResposta: {fileID: 0}
+  scrollRect: {fileID: 0}
+  mensagemInicialPrefab: {fileID: 0}
+  perguntas:
+  - "Qual tipo de internet voc\xEAs instalam?"
+  - "O que \xE9 fibra \xF3ptica?"
+  - "E o que \xE9 r\xE1dio frequ\xEAncia?"
+  - "Qual \xE9 mais r\xE1pida?"
+  - Qual tem mais estabilidade?
+  - Precisa de visada direta?
+  - "Posso instalar em \xE1rea rural?"
+  - "Qual o alcance m\xE1ximo?"
+  - O que preciso ter no local?
+  - "Como \xE9 feita a instala\xE7\xE3o?"
+  respostas:
+  - "Trabalhamos com tecnologia de Fibra \xD3ptica e R\xE1dio Frequ\xEAncia."
+  - "A fibra \xF3ptica usa cabos de vidro que transmitem dados pela luz."
+  - "O r\xE1dio usa antenas para transmitir sinal sem fio entre torres e o cliente."
+  - "A fibra \xF3ptica \xE9 mais r\xE1pida e tem menor lat\xEAncia."
+  - "A fibra \xE9 mais est\xE1vel, o r\xE1dio pode sofrer interfer\xEAncia."
+  - "Sim, o r\xE1dio precisa de visada direta entre antenas."
+  - "Sim, o r\xE1dio \xE9 ideal para regi\xF5es afastadas."
+  - "O alcance varia conforme o terreno, geralmente at\xE9 15 km para r\xE1dio."
+  - "Energia est\xE1vel e ponto alto para instala\xE7\xE3o da antena ou roteador."
+  - "Um t\xE9cnico vai at\xE9 o local para instalar os equipamentos e testar o sinal."

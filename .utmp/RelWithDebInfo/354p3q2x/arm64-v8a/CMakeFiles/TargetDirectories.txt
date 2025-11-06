@@ -1,0 +1,5 @@
+C:/Users/53641168830/Connect1/.utmp/RelWithDebInfo/354p3q2x/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/53641168830/Connect1/.utmp/RelWithDebInfo/354p3q2x/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/53641168830/Connect1/.utmp/RelWithDebInfo/354p3q2x/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/53641168830/Connect1/.utmp/RelWithDebInfo/354p3q2x/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/53641168830/Connect1/.utmp/RelWithDebInfo/354p3q2x/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
