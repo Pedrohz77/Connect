@@ -31,38 +31,63 @@ public class ChatManagerIA : MonoBehaviour
     public Transform contentArea; // Content do ScrollView
     public GameObject userMessagePrefab;
     public GameObject botMessagePrefab;
-    public TMP_Text avisoLimiteTexto; // 🔹Texto de aviso (adicionar no inspector)
+    public TMP_Text avisoLimiteTexto;
 
     [Header("Configuração do Servidor")]
     public string apiUrl = "http://localhost:3000/api/chat";
 
     [Header("Limites de texto")]
-    public int maxInputLength = 30;   //  máximo de caracteres permitidos no input
-    public int maxBotWords = 10;       //  máximo de palavras na resposta do bot
+    public int maxInputLength = 30;
+
+    [Header("Painel e botões de chat")]
+    public GameObject painelChat;      // Painel que contém o chat completo
+    public GameObject botaoAbrirChat;  // Ícone do balão
+    public GameObject botaoFecharChat; // Ícone X
 
     void Start()
     {
         if (inputField != null)
         {
             inputField.characterLimit = maxInputLength;
-
-            // 🔹 Escuta mudança de texto pra mostrar aviso quando atingir o limite
             inputField.onValueChanged.AddListener(OnInputChanged);
         }
 
-        // 🔸 Esconde o aviso no início
         if (avisoLimiteTexto != null)
             avisoLimiteTexto.gameObject.SetActive(false);
+
+        // 🔹 Garante que comece fechado
+        if (painelChat != null)
+            painelChat.SetActive(false);
+
+        if (botaoFecharChat != null)
+            botaoFecharChat.SetActive(false);
+
+        if (botaoAbrirChat != null)
+            botaoAbrirChat.SetActive(true);
+    }
+
+    // 🟢 Funções para abrir e fechar o chat
+    public void AbrirChat()
+    {
+        if (painelChat != null) painelChat.SetActive(true);
+        if (botaoAbrirChat != null) botaoAbrirChat.SetActive(false);
+        if (botaoFecharChat != null) botaoFecharChat.SetActive(true);
+    }
+
+    public void FecharChat()
+    {
+        if (painelChat != null) painelChat.SetActive(false);
+        if (botaoAbrirChat != null) botaoAbrirChat.SetActive(true);
+        if (botaoFecharChat != null) botaoFecharChat.SetActive(false);
     }
 
     void OnInputChanged(string currentText)
     {
-        // Mostra aviso quando atinge o limite
         if (avisoLimiteTexto != null)
         {
             if (currentText.Length >= maxInputLength)
             {
-                avisoLimiteTexto.text = $"Limite de caracteres atingido!"; //{maxInputLength}
+                avisoLimiteTexto.text = $"Limite de caracteres atingido!";
                 avisoLimiteTexto.gameObject.SetActive(true);
             }
             else
@@ -116,13 +141,6 @@ public class ChatManagerIA : MonoBehaviour
                     ? data.assistant.content
                     : "Erro ao interpretar resposta.";
 
-                // 🔹 Limita a resposta da IA a X palavras
-                string[] palavras = botResponse.Split(' ');
-                if (palavras.Length > maxBotWords)
-                {
-                    botResponse = string.Join(" ", palavras, 0, maxBotWords) + "...";
-                }
-
                 AddMessagePair(userInput, botResponse);
             }
         }
@@ -139,13 +157,5 @@ public class ChatManagerIA : MonoBehaviour
         GameObject botMsg = Instantiate(botMessagePrefab, contentArea);
         botMsg.SetActive(true);
         botMsg.GetComponentInChildren<TMP_Text>().text = botText;
-
-        // 🔸 Faz o scroll descer automaticamente
-        ScrollRect scroll = contentArea.GetComponentInParent<ScrollRect>();
-        if (scroll != null)
-        {
-            Canvas.ForceUpdateCanvases();
-            scroll.verticalNormalizedPosition = 0;
-        }
     }
 }
