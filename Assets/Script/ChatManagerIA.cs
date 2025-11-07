@@ -157,5 +157,38 @@ public class ChatManagerIA : MonoBehaviour
         GameObject botMsg = Instantiate(botMessagePrefab, contentArea);
         botMsg.SetActive(true);
         botMsg.GetComponentInChildren<TMP_Text>().text = botText;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentArea.GetComponent<RectTransform>());
+        StartCoroutine(ScrollToBottom());
     }
+
+    IEnumerator ScrollToBottom()
+    {
+        // Espera 2 frames para o layout atualizar
+        yield return null;
+        yield return null;
+
+        Canvas.ForceUpdateCanvases();
+
+        ScrollRect scroll = contentArea.GetComponentInParent<ScrollRect>();
+        if (scroll != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contentArea.GetComponent<RectTransform>());
+            scroll.verticalNormalizedPosition = 0f;
+            Canvas.ForceUpdateCanvases();
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (contentArea != null)
+        {
+            var pos = contentArea.GetComponent<RectTransform>().anchoredPosition;
+            pos.x = 0; // trava o movimento lateral
+            contentArea.GetComponent<RectTransform>().anchoredPosition = pos;
+        }
+    }
+
+
+
 }
