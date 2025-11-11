@@ -8018,8 +8018,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07ae3f2dbf7afab42954c09db529922a, type: 2}
-  m_sharedMaterial: {fileID: -6295086895626402556, guid: 07ae3f2dbf7afab42954c09db529922a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 11ed8cb030eaf5a4d91b76704c0255a0, type: 2}
+  m_sharedMaterial: {fileID: -5360326320693278789, guid: 11ed8cb030eaf5a4d91b76704c0255a0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
