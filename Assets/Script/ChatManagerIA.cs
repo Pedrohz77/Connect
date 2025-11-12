@@ -28,21 +28,27 @@ public class ChatManagerIA : MonoBehaviour
 {
     [Header("Referências de UI")]
     public TMP_InputField inputField;
-    public Transform contentArea; // Content do ScrollView
+    public Transform contentArea;
     public GameObject userMessagePrefab;
     public GameObject botMessagePrefab;
     public TMP_Text avisoLimiteTexto;
 
+    [Header("Avisos e carregamento")]
+    public GameObject avisoTexto;
+
     [Header("Configuração do Servidor")]
     public string apiUrl = "http://localhost:3000/api/chat";
 
-    [Header("Limites de texto")]
-    public int maxInputLength = 30;
+    [Header("Limites e controle de delay")]
+    public int maxInputLength = 40;
+    public float delayEntreMensagens = 3f;
 
     [Header("Painel e botões de chat")]
-    public GameObject painelChat;      // Painel que contém o chat completo
-    public GameObject botaoAbrirChat;  // Ícone do balão
-    public GameObject botaoFecharChat; // Ícone X
+    public GameObject painelChat;
+    public GameObject botaoAbrirChat;
+    public GameObject botaoFecharChat;
+
+    private bool aguardandoResposta = false;
 
     void Start()
     {
@@ -55,7 +61,9 @@ public class ChatManagerIA : MonoBehaviour
         if (avisoLimiteTexto != null)
             avisoLimiteTexto.gameObject.SetActive(false);
 
-        // 🔹 Garante que comece fechado
+        if (avisoTexto != null)
+            avisoTexto.SetActive(false);
+
         if (painelChat != null)
             painelChat.SetActive(false);
 
@@ -66,7 +74,6 @@ public class ChatManagerIA : MonoBehaviour
             botaoAbrirChat.SetActive(true);
     }
 
-    // 🟢 Funções para abrir e fechar o chat
     public void AbrirChat()
     {
         if (painelChat != null) painelChat.SetActive(true);
@@ -83,22 +90,29 @@ public class ChatManagerIA : MonoBehaviour
 
     void OnInputChanged(string currentText)
     {
-        if (avisoLimiteTexto != null)
+        if (avisoLimiteTexto == null) return;
+
+        if (currentText.Length >= maxInputLength)
         {
-            if (currentText.Length >= maxInputLength)
-            {
-                avisoLimiteTexto.text = $"Limite de caracteres atingido!";
-                avisoLimiteTexto.gameObject.SetActive(true);
-            }
-            else
-            {
-                avisoLimiteTexto.gameObject.SetActive(false);
-            }
+            avisoLimiteTexto.text = "Limite de caracteres atingido!";
+            avisoLimiteTexto.gameObject.SetActive(true);
+        }
+        else
+        {
+            avisoLimiteTexto.gameObject.SetActive(false);
         }
     }
 
     public void OnSendMessage()
     {
+        if (aguardandoResposta)
+        {
+            
+            if (avisoTexto != null && !avisoTexto.activeSelf)
+                StartCoroutine(MostrarAvisoTemporario("Aguarde um pouco pra enviar novamente.", 2f));
+            return;
+        }
+
         string userInput = inputField.text.Trim();
         if (string.IsNullOrEmpty(userInput)) return;
 
@@ -117,6 +131,8 @@ public class ChatManagerIA : MonoBehaviour
 
     IEnumerator SendChatPair(ChatRequest request, string userInput)
     {
+        aguardandoResposta = true;
+
         string json = JsonUtility.ToJson(request);
         using (UnityWebRequest www = new UnityWebRequest(apiUrl, "POST"))
         {
@@ -144,12 +160,21 @@ public class ChatManagerIA : MonoBehaviour
                 AddMessagePair(userInput, botResponse);
             }
         }
+
+        yield return new WaitForSeconds(delayEntreMensagens);
+        aguardandoResposta = false;
+    }
+
+    IEnumerator MostrarAvisoTemporario(string texto, float duracao)
+    {
+        avisoTexto.SetActive(true);
+        avisoTexto.GetComponent<TMP_Text>().text = texto;
+        yield return new WaitForSeconds(duracao);
+        avisoTexto.SetActive(false);
     }
 
     void AddMessagePair(string userText, string botText)
     {
-        Debug.Log("Adicionando mensagens: " + userText + " / " + botText);
-
         GameObject userMsg = Instantiate(userMessagePrefab, contentArea);
         userMsg.SetActive(true);
         userMsg.GetComponentInChildren<TMP_Text>().text = userText;
@@ -164,10 +189,8 @@ public class ChatManagerIA : MonoBehaviour
 
     IEnumerator ScrollToBottom()
     {
-        // Espera 2 frames para o layout atualizar
         yield return null;
         yield return null;
-
         Canvas.ForceUpdateCanvases();
 
         ScrollRect scroll = contentArea.GetComponentInParent<ScrollRect>();
@@ -184,11 +207,8 @@ public class ChatManagerIA : MonoBehaviour
         if (contentArea != null)
         {
             var pos = contentArea.GetComponent<RectTransform>().anchoredPosition;
-            pos.x = 0; // trava o movimento lateral
+            pos.x = 0;
             contentArea.GetComponent<RectTransform>().anchoredPosition = pos;
         }
     }
-
-
-
 }
