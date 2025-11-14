@@ -86,6 +86,8 @@ public class ChatManagerIA : MonoBehaviour
         if (painelChat != null) painelChat.SetActive(false);
         if (botaoAbrirChat != null) botaoAbrirChat.SetActive(true);
         if (botaoFecharChat != null) botaoFecharChat.SetActive(false);
+
+        ApagarMensagens();
     }
 
     void OnInputChanged(string currentText)
@@ -210,5 +212,15 @@ public class ChatManagerIA : MonoBehaviour
             pos.x = 0;
             contentArea.GetComponent<RectTransform>().anchoredPosition = pos;
         }
+    }
+
+    void ApagarMensagens()
+    {
+        foreach (Transform child in contentArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        Canvas.ForceUpdateCanvases();
     }
 }

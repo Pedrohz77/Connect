@@ -4815,7 +4815,7 @@ MonoBehaviour:
   botMessagePrefab: {fileID: 710753533}
   avisoLimiteTexto: {fileID: 1004093644}
   avisoTexto: {fileID: 324392486}
-  apiUrl: https://chatconnect-wlk3.onrender.com/api/chat
+  apiUrl: http://localhost:3000/api/chat
   maxInputLength: 40
   delayEntreMensagens: 3
   painelChat: {fileID: 956548391}
