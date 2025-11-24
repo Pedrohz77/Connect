@@ -331,6 +331,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2512387470890420964, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4691,7 +4695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sofi
+  m_text: Bella
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07ae3f2dbf7afab42954c09db529922a, type: 2}
   m_sharedMaterial: {fileID: -6295086895626402556, guid: 07ae3f2dbf7afab42954c09db529922a, type: 2}
@@ -4815,7 +4819,7 @@ MonoBehaviour:
   botMessagePrefab: {fileID: 710753533}
   avisoLimiteTexto: {fileID: 1004093644}
   avisoTexto: {fileID: 324392486}
-  apiUrl: http://localhost:3000/api/chat
+  apiUrl: https://chatconnect-server-hye5cec2a5gef2f8.eastus2-01.azurewebsites.net/api/chat
   maxInputLength: 40
   delayEntreMensagens: 3
   painelChat: {fileID: 956548391}
@@ -5722,7 +5726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &946870054
 MonoBehaviour:
   m_ObjectHideFlags: 0

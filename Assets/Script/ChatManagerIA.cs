@@ -37,7 +37,7 @@ public class ChatManagerIA : MonoBehaviour
     public GameObject avisoTexto;
 
     [Header("Configuração do Servidor")]
-    public string apiUrl = "http://localhost:3000/api/chat";
+    public string apiUrl = "https://chatconnect-server-hye5cec2a5gef2f8.eastus2-01.azurewebsites.net/api/chat";
 
     [Header("Limites e controle de delay")]
     public int maxInputLength = 40;

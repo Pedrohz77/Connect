@@ -14,8 +14,8 @@ public class ChatBotPerguntas : MonoBehaviour
     public ScrollRect scrollRect;
 
     [Header("Mensagem Inicial e Botão Roxo")]
-    public GameObject mensagemInicial; // 👈 Mensagem “Este é o Chat...”
-    public GameObject botaoRoxo;       // 👈 Botão roxo que mostra as perguntas
+    public GameObject mensagemInicial; 
+    public GameObject botaoRoxo;      
 
     [Header("Perguntas e Respostas")]
     [TextArea(2, 5)] public string[] perguntas;
@@ -33,7 +33,6 @@ public class ChatBotPerguntas : MonoBehaviour
         painelChat.SetActive(false);
         botaoFechar.gameObject.SetActive(false);
 
-        // 🔹 Abre o chat
         botaoAbrirChat.onClick.RemoveAllListeners();
         botaoAbrirChat.onClick.AddListener(() =>
         {
@@ -41,7 +40,6 @@ public class ChatBotPerguntas : MonoBehaviour
             botaoFechar.gameObject.SetActive(true);
             botaoAbrirChat.gameObject.SetActive(false);
 
-            // Mostra mensagem inicial e botão roxo
             if (mensagemInicial != null)
                 mensagemInicial.SetActive(true);
             if (botaoRoxo != null)
@@ -55,7 +53,6 @@ public class ChatBotPerguntas : MonoBehaviour
                 scrollRect.verticalNormalizedPosition = 1f;
         });
 
-        // 🔹 Fecha o chat
         botaoFechar.onClick.RemoveAllListeners();
         botaoFechar.onClick.AddListener(() =>
         {
@@ -64,7 +61,6 @@ public class ChatBotPerguntas : MonoBehaviour
             botaoAbrirChat.gameObject.SetActive(true);
         });
 
-        // 🔹 Cria os botões de perguntas (mas esconde)
         for (int i = 0; i < perguntas.Length; i++)
         {
             int index = i;
@@ -80,7 +76,6 @@ public class ChatBotPerguntas : MonoBehaviour
                 botao.onClick.AddListener(() => MostrarResposta(index));
         }
 
-        // 🔹 Listener para o botão roxo
         if (botaoRoxo != null)
         {
             Button btnRoxo = botaoRoxo.GetComponent<Button>();
@@ -92,7 +87,6 @@ public class ChatBotPerguntas : MonoBehaviour
         }
     }
 
-    // 🔹 Quando clicar no botão roxo
     public void MostrarPerguntas()
     {
         if (mensagemInicial != null)
