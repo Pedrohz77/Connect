@@ -152,7 +152,7 @@ public class ChatManagerIA : MonoBehaviour
             else
             {
                 string jsonResponse = www.downloadHandler.text;
-                Debug.Log("Resposta: " + jsonResponse);
+                //Debug.Log("Resposta: " + jsonResponse);
 
                 AssistantResponse data = JsonUtility.FromJson<AssistantResponse>(jsonResponse);
                 string botResponse = (data != null && data.assistant != null)
